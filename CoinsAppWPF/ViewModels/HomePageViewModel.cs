@@ -17,7 +17,8 @@ namespace CoinsAppWPF.ViewModels
         private CoinService _coinService;
         public CoinListViewModel CoinListViewModel { get; }
         private string searchText;
-        private ObservableCollection<CoinSearchDTO?> searchResults;
+        private ObservableCollection<CoinSearch?> searchResults;
+        private bool isDropdownOpen;
         public ICommand SearchCommand { get; }
 
         public string SearchText
@@ -29,17 +30,29 @@ namespace CoinsAppWPF.ViewModels
                 {
                     searchText = value;
                     OnPropertyChanged(nameof(SearchText));
+                    ExecuteSearch();
+                    IsDropdownOpen = !string.IsNullOrEmpty(searchText);
                 }
             }
         }
 
-        public ObservableCollection<CoinSearchDTO?> SearchResults
+        public ObservableCollection<CoinSearch?> SearchResults
         {
             get { return searchResults; }
             set
             {
                 searchResults = value;
                 OnPropertyChanged(nameof(SearchResults));
+            }
+        }
+
+        public bool IsDropdownOpen
+        {
+            get { return isDropdownOpen; }
+            set
+            {
+                isDropdownOpen = value;
+                OnPropertyChanged(nameof(IsDropdownOpen));
             }
         }
 
@@ -55,7 +68,7 @@ namespace CoinsAppWPF.ViewModels
             if (!string.IsNullOrEmpty(searchText))
             {
                 var result = await _coinService.SearchCoin(searchText, CancellationToken.None);
-                SearchResults = new ObservableCollection<CoinSearchDTO?>(result.Coins);
+                SearchResults = new ObservableCollection<CoinSearch?>(result.Coins);
             }
         }
     }
