@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:components="clr-namespace:CoinsAppWPF.Components" 
-             xmlns:viewmodels="clr-namespace:CoinsAppWPF.ViewModels" 
+             xmlns:components="clr-namespace:CoinsAppWPF.Components"
+             xmlns:viewmodels="clr-namespace:CoinsAppWPF.ViewModels"
              xmlns:converters="clr-namespace:CoinsAppWPF.Converters"
              d:DataContext="{d:DesignInstance Type=viewmodels:HomePageViewModel}"
              mc:Ignorable="d" 
@@ -12,8 +12,8 @@
 
     <UserControl.Resources>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:UppercaseConverter x:Key="UppercaseConverter"/>
     </UserControl.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -42,64 +42,102 @@
                 Grid.Row="1"
                 BorderBrush="#e0e0e0" 
                 Padding="20">
-            <Grid>
+            <Grid HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="350"/>
                 </Grid.ColumnDefinitions>
+                
+                <TextBlock Text="Explore the cryptoeconomy"
+                           FontSize="28"
+                           FontWeight="DemiBold"
+                           HorizontalAlignment="Center"
+                           Margin="0 0 0 20"/>
 
-                <TextBox Grid.Row="0" Text="{Binding SearchText}"/>
-                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                         Padding="5"
-                         />
+                <Border CornerRadius="20"
+                        BorderThickness="2"
+                        BorderBrush="Black"
+                        SnapsToDevicePixels="True"
+                        Grid.Row="1">
+                    <Grid>
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=border}"/>
+                        </Grid.OpacityMask>
+                        <Border x:Name="border"
+                                Background="White"
+                                CornerRadius="20"/>
+                        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                             Padding="10"
+                             FontSize="14"
+                             BorderThickness="0"/>
+                    </Grid>
+                </Border>
                 <Border BorderThickness="2" 
                         CornerRadius="10"
                         BorderBrush="Black"
-                        Grid.Row="1"
                         Margin="0 5 0 0"
-                        Visibility="{Binding IsDropdownOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <Border.Effect>
+                        Visibility="{Binding IsDropdownOpen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        SnapsToDevicePixels="True"
+                        Grid.Row="2">
+                    <!--<Border.Effect>
                         <DropShadowEffect Color="Gray" Direction="315" ShadowDepth="5" Opacity="0.8"/>
-                    </Border.Effect>
+                    </Border.Effect>-->
                     <Grid>
-                        <ScrollViewer Height="350">
-                        <ItemsControl BorderThickness="1" 
-                                      ItemsSource="{Binding SearchResults, Mode=OneWay}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="viewmodels:HomePageViewModel">
-                                    <Grid Background="White" 
-                                          HorizontalAlignment="Stretch"
-                                          Margin="0 5">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=listBorder}"/>
+                        </Grid.OpacityMask>
+                        <Border x:Name="listBorder"
+                                Background="White"
+                                CornerRadius="10"/>
+                        <ScrollViewer Height="350"
+                                      VerticalScrollBarVisibility="Hidden">
+                            <ItemsControl BorderThickness="1" 
+                                          ItemsSource="{Binding SearchResults, Mode=OneWay}">
+                                <ItemsControl.ItemContainerStyle>
+                                    <Style TargetType="ContentPresenter">
+                                        <EventSetter Event="MouseLeftButtonUp" Handler="ContentPresenter_MouseLeftButtonUp"/>
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="viewmodels:HomePageViewModel">
+                                        <Grid Background="White" 
+                                              Margin="10 5"
+                                              Style="{StaticResource ListItem}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="55"/>
+                                            </Grid.RowDefinitions>
 
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                        <Image Grid.Column="0" 
-                                               Source="{Binding LargeImage}" 
-                                               Width="40"/>
-                                        <TextBlock Grid.Column="1" 
-                                                   Text="{Binding Name}" 
-                                                   VerticalAlignment="Center"
-                                                   FontSize="16"/>
-                                        <Button Grid.Column="2" 
-                                                Content="Show Detail" 
-                                                Click="Button_Click"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
+                                            <Image Grid.Column="0" 
+                                                   Source="{Binding LargeImage}" 
+                                                   HorizontalAlignment="Left"
+                                                   Margin="10"
+                                                   Width="40"/>
+                                            <TextBlock Grid.Column="1" 
+                                                       Text="{Binding Name}" 
+                                                       VerticalAlignment="Center"
+                                                       FontSize="14"/>
+                                            <TextBlock Grid.Column="2" 
+                                                       Text="{Binding Symbol, Converter={StaticResource UppercaseConverter}}" 
+                                                       FontSize="14"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Right"
+                                                       Margin="0 0 5 0"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
                     </Grid>
                 </Border>
             </Grid>
