@@ -24,16 +24,16 @@ namespace CoinsAppWPF.ViewModels
             }
         }
 
-        public CoinDetailViewModel(Coin coin)
+        public CoinDetailViewModel(ICoin coin)
         {
             _coinService = new CoinService();
-            LoadCoin(coin.Id, CancellationToken.None);
+            LoadCoin(coin, CancellationToken.None);
         }
 
-        public async void LoadCoin(string? id, CancellationToken cancellationToken)
+        public async void LoadCoin(ICoin? coin, CancellationToken cancellationToken)
         {
-            var coin = await _coinService.GetSingle(id, cancellationToken);
-            Coin = coin;
+            var coinDetails = await _coinService.GetSingle(coin.Id, cancellationToken);
+            Coin = coinDetails;
         }
     }
 }

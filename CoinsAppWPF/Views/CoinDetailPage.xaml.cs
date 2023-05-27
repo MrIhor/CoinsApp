@@ -19,7 +19,7 @@ namespace CoinsAppWPF.Views
 {
     public partial class CoinDetailPage : Page
     {
-        public CoinDetailPage(Coin coin)
+        public CoinDetailPage(ICoin coin)
         {
             InitializeComponent();
             DataContext = new CoinDetailViewModel(coin);
