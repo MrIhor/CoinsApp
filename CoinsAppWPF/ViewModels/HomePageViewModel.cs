@@ -17,8 +17,8 @@ namespace CoinsAppWPF.ViewModels
         private CoinService _coinService;
         public CoinListViewModel CoinListViewModel { get; }
         private string searchText;
-        private ObservableCollection<CoinSearchDTO?> searchResults;
-        public ICommand SearchCommand { get; }
+        private ObservableCollection<CoinSearch?> searchResults;
+        private bool isDropdownOpen;
 
         public string SearchText
         {
@@ -29,11 +29,14 @@ namespace CoinsAppWPF.ViewModels
                 {
                     searchText = value;
                     OnPropertyChanged(nameof(SearchText));
+                    ExecuteSearch();
+                    IsDropdownOpen = !string.IsNullOrEmpty(searchText); 
+                    OnPropertyChanged(nameof(IsDropdownOpen));
                 }
             }
         }
 
-        public ObservableCollection<CoinSearchDTO?> SearchResults
+        public ObservableCollection<CoinSearch?> SearchResults
         {
             get { return searchResults; }
             set
@@ -43,11 +46,20 @@ namespace CoinsAppWPF.ViewModels
             }
         }
 
+        public bool IsDropdownOpen
+        {
+            get { return isDropdownOpen;}
+            set
+            {
+                isDropdownOpen = value;
+                OnPropertyChanged(nameof(IsDropdownOpen));
+            }
+        }
+
         public HomePageViewModel()
         {
             _coinService = new CoinService();
             CoinListViewModel = new CoinListViewModel();
-            SearchCommand = new RelayCommand(ExecuteSearch);
         }
 
         private async void ExecuteSearch()
@@ -55,7 +67,7 @@ namespace CoinsAppWPF.ViewModels
             if (!string.IsNullOrEmpty(searchText))
             {
                 var result = await _coinService.SearchCoin(searchText, CancellationToken.None);
-                SearchResults = new ObservableCollection<CoinSearchDTO?>(result.Coins);
+                SearchResults = new ObservableCollection<CoinSearch?>(result.Coins);
             }
         }
     }
