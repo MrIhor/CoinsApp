@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace CoinsAppWPF.Models
 {
-    public class CoinDetails
+    public class CoinDetails : ICoin
     {
         public string? Id { get; set; }
         public string? Symbol { get; set; }
