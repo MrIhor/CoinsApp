@@ -62,6 +62,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
                                 <Image Grid.Column="0" 
@@ -69,8 +70,8 @@
                                    Width="40"/>
                                 <TextBlock Grid.Column="1" 
                                        Text="{Binding Name}" 
-                                       VerticalAlignment="Center"
-                                       />
+                                       VerticalAlignment="Center"/>
+                                <Button Grid.Column="2" Content="Show Detail" Click="Button_Click"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

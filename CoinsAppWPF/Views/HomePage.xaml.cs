@@ -24,5 +24,12 @@ namespace CoinsAppWPF.Views
             InitializeComponent();
             DataContext = new HomePageViewModel();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var coin = button?.DataContext as CoinSearchDTO;
+            App.Navigator.Navigate(new CoinDetailPage(coin));
+        }
     }
 }
