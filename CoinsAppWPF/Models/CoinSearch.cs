@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoinsAppWPF.Models
 {
-    public class CoinSearchDTO : ICoin
+    public class CoinSearch : ICoin
     {
         public string? Id { get; set; }
         public string? Symbol { get; set; }

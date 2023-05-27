@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoinsAppWPF.Models
 {
-    public class CoinSearch
+    public class CoinListSearch
     {
         public IEnumerable<CoinSearch>? Coins { get; set; }
     }

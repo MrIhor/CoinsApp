@@ -13,7 +13,7 @@ namespace CoinsAppWPF.Services
         Task<List<Coin>?> GetAllCoins(CancellationToken cancellationToken, string? currency);
         Task<CoinDetails?> GetSingle(string? id, CancellationToken cancellationToken);
         Task<PriceData?> GetCoinMarketChart(string? id, CancellationToken cancellationToken, string currency, int days);
-        Task<CoinSearch?> SearchCoin(string? searchString, CancellationToken cancellationToken);
+        Task<CoinListSearch?> SearchCoin(string? searchString, CancellationToken cancellationToken);
         Task<List<string>?> GetCurrencies(CancellationToken cancellationToken);
     }
 }

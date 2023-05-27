@@ -46,10 +46,10 @@ namespace CoinsAppWPF.Services
             return GetAsync<PriceData>(coinPricesUrl, cancellationToken);
         }
 
-        public Task<CoinSearch?> SearchCoin(string? searchString, CancellationToken cancellationToken)
+        public Task<CoinListSearch?> SearchCoin(string? searchString, CancellationToken cancellationToken)
         {
             string coinSearchUrl = $"search?query={searchString}";
-            return GetAsync<CoinSearch>(coinSearchUrl, cancellationToken);
+            return GetAsync<CoinListSearch>(coinSearchUrl, cancellationToken);
         }
 
         public Task<List<string>?> GetCurrencies(CancellationToken cancellationToken)
