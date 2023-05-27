@@ -24,10 +24,10 @@ namespace CoinsAppWPF.Components
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ContentPresenter_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var button = sender as Button;
-            var coin = button?.DataContext as Coin;
+            var element = sender as FrameworkElement;
+            var coin = element?.DataContext as Coin;
             App.Navigator.Navigate(new CoinDetailPage(coin));
         }
     }
