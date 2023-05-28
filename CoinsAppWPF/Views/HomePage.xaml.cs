@@ -19,10 +19,12 @@ namespace CoinsAppWPF.Views
 {
     public partial class HomePage : UserControl
     {
+        private HomePageViewModel _homeViewModel;
         public HomePage()
         {
             InitializeComponent();
             DataContext = new HomePageViewModel();
+            _homeViewModel = new HomePageViewModel();
         }
 
         private void ContentPresenter_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -30,6 +32,17 @@ namespace CoinsAppWPF.Views
             var element = sender as FrameworkElement;
             var coin = element?.DataContext as CoinSearch;
             App.Navigator.Navigate(new CoinDetailPage(coin));
+
+            if (_homeViewModel != null )
+            {
+                _homeViewModel.SearchText = "";
+                _homeViewModel.SearchResults = null;
+            }
+        }
+
+        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            _homeViewModel.IsDropdownOpen = false;
         }
     }
 }

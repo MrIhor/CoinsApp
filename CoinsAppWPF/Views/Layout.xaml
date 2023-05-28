@@ -15,9 +15,7 @@
 
         <Frame Grid.Row="1" x:Name="NavigationFrame" NavigationUIVisibility="Hidden">
             <Frame.Content>
-                <ScrollViewer>
-                    <local:HomePage/>
-                </ScrollViewer>
+                <local:HomePage/>
             </Frame.Content>
         </Frame>
     </Grid>

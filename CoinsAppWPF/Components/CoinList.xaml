@@ -31,10 +31,10 @@
                     Background="White"
                     CornerRadius="20"/>
             <ComboBox ItemsSource="{Binding Currency}"
-                              SelectedItem="{Binding SelectedCurrency}"
-                              BorderThickness="0"
-                              Padding="10"
-                              FontSize="16"/>
+                      SelectedItem="{Binding SelectedCurrency}"
+                      BorderThickness="0"
+                      Padding="10"
+                      FontSize="16"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -88,9 +88,9 @@
                            HorizontalAlignment="Center"/>
             </Grid>
 
-            <ItemsControl Grid.Row="1" 
-                          BorderThickness="0" 
-                          ItemsSource="{Binding CoinList, Mode=OneWay}">
+            <ItemsControl BorderThickness="0" 
+                          ItemsSource="{Binding CoinList, Mode=OneWay}"
+                          Grid.Row="1">
                 <ItemsControl.ItemContainerStyle>
                     <Style TargetType="ContentPresenter">
                         <EventSetter Event="MouseLeftButtonUp" Handler="ContentPresenter_MouseLeftButtonUp"/>
