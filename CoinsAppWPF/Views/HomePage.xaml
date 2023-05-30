@@ -6,6 +6,7 @@
              xmlns:components="clr-namespace:CoinsAppWPF.Components"
              xmlns:viewmodels="clr-namespace:CoinsAppWPF.ViewModels"
              xmlns:converters="clr-namespace:CoinsAppWPF.Converters"
+             xmlns:b="https://github.com/helluvamatt/BootstrapIcons.Wpf/"
              d:DataContext="{d:DesignInstance Type=viewmodels:HomePageViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -14,7 +15,7 @@
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converters:UppercaseConverter x:Key="UppercaseConverter"/>
     </UserControl.Resources>
-    <ScrollViewer ScrollChanged="ScrollViewer_ScrollChanged">
+    <Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -30,24 +31,22 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" 
-                           Text="CryptoBase" 
-                           FontSize="32"/>
+                               Text="CryptoBase" 
+                               FontSize="32"/>
 
-                <!--<Button Grid.Column="1" 
-                    FontSize="16"
-                    Content="Convert currency"
-                    Command="{Binding convertCurrency}"/>-->
+                <Button Grid.Column="1" 
+                            FontSize="16"
+                            Content="Convert currency"/>
             </Grid>
             <Border BorderThickness="0 2 0 2" 
-                Grid.Row="1"
-                BorderBrush="#e0e0e0" 
-                Padding="20">
+                        Grid.Row="1"
+                        BorderBrush="#e0e0e0" 
+                        Padding="20">
                 <Grid HorizontalAlignment="Center">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="5" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -55,103 +54,128 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Explore the cryptoeconomy"
-                           FontSize="28"
-                           FontWeight="DemiBold"
-                           HorizontalAlignment="Center"
-                           Margin="0 0 0 20"/>
+                                   FontSize="28"
+                                   FontWeight="DemiBold"
+                                   HorizontalAlignment="Center"
+                                   Margin="0 0 0 20"/>
 
                     <Border CornerRadius="20"
-                        BorderThickness="2"
-                        BorderBrush="Black"
-                        SnapsToDevicePixels="True"
-                        Grid.Row="1"
-                        Margin="0 0 0 0">
+                                BorderThickness="2"
+                                BorderBrush="Black"
+                                SnapsToDevicePixels="True"
+                                Grid.Row="1"
+                                Margin="0 0 0 0">
                         <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
                             <Grid.OpacityMask>
                                 <VisualBrush Visual="{Binding ElementName=border}"/>
                             </Grid.OpacityMask>
                             <Border x:Name="border"
-                                Background="White"
-                                CornerRadius="20"/>
-                            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                                 x:Name="searchTextBox"
-                                 Padding="10"
-                                 FontSize="14"
-                                 BorderThickness="0"/>
+                                        Background="White"
+                                        CornerRadius="20"/>
+                            <b:BootstrapIcon Icon="Search" 
+                                                 Width="16" 
+                                                 Height="16" 
+                                                 Foreground="Black"
+                                                 Margin="10 0 0 0"/>
+                            <TextBox Grid.Column="1"
+                                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                         Padding="10"
+                                         FontSize="16"
+                                         BorderThickness="0"
+                                         VerticalAlignment="Center"/>
+                            <Button Grid.Column="2"
+                                        Margin="2 10"
+                                        HorizontalAlignment="Right"
+                                        Click="Button_Click">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <b:BootstrapIcon Icon="X" 
+                                                             Width="24"
+                                                             Height="24"
+                                                             Foreground="Black"
+                                                             Margin="1"/>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
                         </Grid>
                     </Border>
 
-                    <Grid Grid.Row="2"/>
-
-                    <Popup IsOpen="{Binding IsDropdownOpen}" 
-                       Placement="Bottom"
-                       StaysOpen="False"
-                       AllowsTransparency="True"
-                       Grid.Row="3">
-                        <Border BorderThickness="2" 
-                            BorderBrush="Black"
-                            CornerRadius="10"
-                            SnapsToDevicePixels="True">
-                            <Grid Width="350">
-                                <Grid.OpacityMask>
-                                    <VisualBrush Visual="{Binding ElementName=listBorder}"/>
-                                </Grid.OpacityMask>
-                                <Border x:Name="listBorder"
-                                Background="White"
-                                CornerRadius="10"/>
-                                <ScrollViewer Height="350"
-                                          VerticalScrollBarVisibility="Hidden">
-                                    <ItemsControl BorderThickness="1" 
-                                          ItemsSource="{Binding SearchResults, Mode=OneWay}">
-                                        <ItemsControl.ItemContainerStyle>
-                                            <Style TargetType="ContentPresenter">
-                                                <EventSetter Event="MouseLeftButtonUp" Handler="ContentPresenter_MouseLeftButtonUp"/>
-                                            </Style>
-                                        </ItemsControl.ItemContainerStyle>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate DataType="viewmodels:HomePageViewModel">
-                                                <Grid Background="White" 
-                                              Margin="10 5"
-                                              Style="{StaticResource ListItem}">
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="55"/>
-                                                    </Grid.RowDefinitions>
-
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="3*"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <Image Grid.Column="0" 
-                                                   Source="{Binding LargeImage}" 
-                                                   HorizontalAlignment="Left"
-                                                   Margin="10"
-                                                   Width="40"/>
-                                                    <TextBlock Grid.Column="1" 
-                                                       Text="{Binding Name}" 
-                                                       VerticalAlignment="Center"
-                                                       FontSize="14"/>
-                                                    <TextBlock Grid.Column="2" 
-                                                       Text="{Binding Symbol, Converter={StaticResource UppercaseConverter}}" 
-                                                       FontSize="14"
-                                                       VerticalAlignment="Center"
-                                                       HorizontalAlignment="Right"
-                                                       Margin="0 0 5 0"/>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </ScrollViewer>
-                            </Grid>
-                        </Border>
-                    </Popup>
+                    <Grid Grid.Row="2"
+                              x:Name="popupPlacement"/>
                 </Grid>
             </Border>
-
-            <components:CoinList Grid.Row="2" 
+                <components:CoinList Grid.Row="2"
                              Margin="0 20 0 0"
                              DataContext="{Binding CoinListViewModel}"/>
         </Grid>
-    </ScrollViewer>
+
+
+        <Popup IsOpen="{Binding IsDropdownOpen}" 
+               Placement="Bottom"
+               AllowsTransparency="True"
+               PlacementTarget="{Binding ElementName=popupPlacement}">
+            <Border BorderThickness="2" 
+                    BorderBrush="Black"
+                    CornerRadius="10"
+                    SnapsToDevicePixels="True">
+                <Grid Width="350">
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=listBorder}"/>
+                    </Grid.OpacityMask>
+                    <Border x:Name="listBorder"
+                            Background="White"
+                            CornerRadius="10"/>
+                    <ScrollViewer Height="350"
+                                  VerticalScrollBarVisibility="Hidden">
+                        <ItemsControl BorderThickness="1" 
+                                      ItemsSource="{Binding SearchResults, Mode=OneWay}">
+                            <ItemsControl.ItemContainerStyle>
+                                <Style TargetType="ContentPresenter">
+                                    <EventSetter Event="MouseLeftButtonUp" Handler="ContentPresenter_MouseLeftButtonUp"/>
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="viewmodels:HomePageViewModel">
+                                    <Grid Background="White" 
+                                          Margin="10 5"
+                                          Style="{StaticResource ListItem}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="55"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Grid.Column="0" 
+                                               Source="{Binding LargeImage}" 
+                                               HorizontalAlignment="Left"
+                                               Margin="10"
+                                               Width="40"/>
+                                        <TextBlock Grid.Column="1" 
+                                                   Text="{Binding Name}" 
+                                                   VerticalAlignment="Center"
+                                                   FontSize="14"/>
+                                        <TextBlock Grid.Column="2" 
+                                                   Text="{Binding Symbol, Converter={StaticResource UppercaseConverter}}" 
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"
+                                                   Margin="0 0 5 0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Popup>
+    </Grid>
 </UserControl>
