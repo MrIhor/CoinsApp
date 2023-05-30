@@ -88,69 +88,72 @@
                            HorizontalAlignment="Center"/>
             </Grid>
 
-            <ItemsControl BorderThickness="0" 
-                          ItemsSource="{Binding CoinList, Mode=OneWay}"
-                          Grid.Row="1">
-                <ItemsControl.ItemContainerStyle>
-                    <Style TargetType="ContentPresenter">
-                        <EventSetter Event="MouseLeftButtonUp" Handler="ContentPresenter_MouseLeftButtonUp"/>
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="viewmodels:CoinListItemViewModel">
-                        <Grid Background="White" 
+            <Grid Grid.Row="1">
+                <ScrollViewer Height="500">
+                    <ItemsControl BorderThickness="0" 
+                              ItemsSource="{Binding CoinList, Mode=OneWay}">
+                        <ItemsControl.ItemContainerStyle>
+                            <Style TargetType="ContentPresenter">
+                                <EventSetter Event="MouseLeftButtonUp" Handler="ContentPresenter_MouseLeftButtonUp"/>
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="viewmodels:CoinListItemViewModel">
+                                <Grid Background="White" 
                               HorizontalAlignment="Stretch" 
                               Style="{StaticResource ListItem}"
                               Margin="10 10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50"/>
-                            </Grid.RowDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"/>
+                                    </Grid.RowDefinitions>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                            <Image Grid.Column="0" 
+                                    <Image Grid.Column="0" 
                                    Source="{Binding Image}" 
                                    Width="40"/>
-                            <TextBlock Grid.Column="1" 
+                                    <TextBlock Grid.Column="1" 
                                        Text="{Binding Name}" 
                                        VerticalAlignment="Center"
                                        FontSize="14"
                                        FontWeight="Medium"/>
-                            <TextBlock Grid.Column="2" 
+                                    <TextBlock Grid.Column="2" 
                                        Text="{Binding CurrentPrice, Converter={StaticResource CurrencyConverter}}" 
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        FontSize="14"
                                        FontWeight="Medium"/>
-                            <TextBlock Grid.Column="3" 
+                                    <TextBlock Grid.Column="3" 
                                        Text="{Binding MarketCap, Converter={StaticResource CurrencyConverter}}" 
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        FontSize="14"
                                        FontWeight="Medium"/>
-                            <TextBlock Grid.Column="4" 
+                                    <TextBlock Grid.Column="4" 
                                        Text="{Binding TotalVolume, Converter={StaticResource CurrencyConverter}}" 
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        FontSize="14"
                                        FontWeight="Medium"/>
-                            <TextBlock Grid.Column="5" 
+                                    <TextBlock Grid.Column="5" 
                                        Text="{Binding CirculatingSupply, Converter={StaticResource CurrencyConverter}}" 
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        FontSize="14"
                                        FontWeight="Medium"/>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>
