@@ -50,5 +50,10 @@ namespace CoinsAppWPF.Views
                 _homeViewModel.SearchResults = null;
             }
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            App.Navigator.Navigate(new ConvertCurrencyPage());
+        }
     }
 }

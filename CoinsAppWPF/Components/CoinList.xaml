@@ -89,7 +89,7 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <ScrollViewer Height="500">
+                <ScrollViewer Height="300" VerticalScrollBarVisibility="Hidden">
                     <ItemsControl BorderThickness="0" 
                               ItemsSource="{Binding CoinList, Mode=OneWay}">
                         <ItemsControl.ItemContainerStyle>

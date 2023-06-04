@@ -14,6 +14,6 @@ namespace CoinsAppWPF.Services
         Task<CoinDetails?> GetSingle(string? id, CancellationToken cancellationToken);
         Task<PriceData?> GetCoinMarketChart(string? id, CancellationToken cancellationToken, string currency, int days);
         Task<CoinListSearch?> SearchCoin(string? searchString, CancellationToken cancellationToken);
-        Task<List<string>?> GetCurrencies(CancellationToken cancellationToken);
+        Task<List<string>?> GetCoinCurrencies(CancellationToken cancellationToken);
     }
 }

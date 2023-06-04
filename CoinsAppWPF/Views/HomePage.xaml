@@ -35,8 +35,9 @@
                                FontSize="32"/>
 
                 <Button Grid.Column="1" 
-                            FontSize="16"
-                            Content="Convert currency"/>
+                        FontSize="16"
+                        Content="Convert currency"
+                        Click="Button_Click_1"/>
             </Grid>
             <Border BorderThickness="0 2 0 2" 
                         Grid.Row="1"
@@ -106,7 +107,7 @@
                     </Border>
 
                     <Grid Grid.Row="2"
-                              x:Name="popupPlacement"/>
+                          x:Name="popupPlacement"/>
                 </Grid>
             </Border>
                 <components:CoinList Grid.Row="2"

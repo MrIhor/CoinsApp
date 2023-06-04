@@ -15,7 +15,7 @@ namespace CoinsAppWPF.ViewModels
         private CoinService _coinService;
         private ObservableCollection<Coin?> _coinListItemViewModels;
         private string _selectedCurrency = "usd";
-        private ObservableCollection<string?> _currencyList;
+        private ObservableCollection<string> _currencyList;
         public ObservableCollection<string> Currency
         {
             get
@@ -66,7 +66,7 @@ namespace CoinsAppWPF.ViewModels
 
         public async void LoadCurrencies(CancellationToken cancellationToken)
         {
-            var _currencyList = await _coinService.GetCurrencies(cancellationToken);
+            var _currencyList = await _coinService.GetCoinCurrencies(cancellationToken);
             Currency = new ObservableCollection<string>(_currencyList);
         }
     }

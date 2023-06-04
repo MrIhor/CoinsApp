@@ -17,9 +17,9 @@ namespace CoinsAppWPF.Services
             BaseAddress = new Uri("https://api.coingecko.com/api/v3/")
         };
 
-        async Task<T?> GetAsync<T>(string resourseName, CancellationToken cancellationToken)
+        async Task<T?> GetAsync<T>(string resourceName, CancellationToken cancellationToken)
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, resourseName);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, resourceName);
             requestMessage.Headers.Add("User-Agent", "PostmanRuntime/7.32.2");
 
             var response = await _client.SendAsync(requestMessage, cancellationToken);
@@ -52,7 +52,7 @@ namespace CoinsAppWPF.Services
             return GetAsync<CoinListSearch>(coinSearchUrl, cancellationToken);
         }
 
-        public Task<List<string>?> GetCurrencies(CancellationToken cancellationToken)
+        public Task<List<string>?> GetCoinCurrencies(CancellationToken cancellationToken)
         {
             string currenciesUrl = "simple/supported_vs_currencies";
             return GetAsync<List<string>?>(currenciesUrl, cancellationToken);
