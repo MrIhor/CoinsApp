@@ -1,0 +1,69 @@
+﻿<Page x:Class="CoinsAppWPF.Views.ConvertCurrencyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CoinsAppWPF.Views" xmlns:viewmodels="clr-namespace:CoinsAppWPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ConvertCurrencyViewModel}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ConvertCurrencyPage">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Button Content="Back" 
+                FontSize="16"
+                Click="Button_Click"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="1"
+                   Text="Currency Converter"
+                   FontSize="26"
+                   HorizontalAlignment="Center"/>
+
+        <Grid Grid.Row="1"
+              Grid.ColumnSpan="2"
+              HorizontalAlignment="Stretch"
+              Margin="0 70 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox ItemsSource="{Binding Currencies}"
+                      SelectedItem="{Binding SelectedFromCurrency}"
+                      Height="50" 
+                      Width="100"/>
+
+            <ComboBox Grid.Column="1"
+                      ItemsSource="{Binding Currencies}"
+                      SelectedItem="{Binding SelectedToCurrency}"
+                      Height="50" Width="100"/>
+
+            <TextBox Grid.Row="1"
+                     Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}"
+                     Width="300"
+                     Padding="10"/>
+            
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Text="{Binding ConvertedValue}"
+                     Width="300"
+                     Padding="10"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -17,14 +17,14 @@
         <converters:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
     </Page.Resources>
 
-    <Grid>
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
 
-        <Grid Grid.Row="0" Margin="20">
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
